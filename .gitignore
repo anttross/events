@@ -166,3 +166,5 @@ $RECYCLE.BIN/
 obj/
 [Rr]elease*/
 [Tt]est[Rr]esult*
+packages/
+App_Data/
