@@ -13,9 +13,9 @@ namespace Event.DAL
         {
             var events = new List<Events>
             {
-            new Events{ID=1,UserID=11,Event="Birthday",Date=DateTime.Parse("2005-09-01")},
-            new Events{ID=2,UserID=11,Event="Wedding",Date=DateTime.Parse("2025-09-01")},
-            new Events{ID=3,UserID=12,Event="Funeral",Date=DateTime.Parse("2075-09-01")}
+            //new Events{ID=1,UserID=11,Event="Birthday",Date=DateTime.Parse("2005-09-01")},
+            //new Events{ID=2,UserID=11,Event="Wedding",Date=DateTime.Parse("2025-09-01")},
+            //new Events{ID=3,UserID=12,Event="Funeral",Date=DateTime.Parse("2075-09-01")}
             };
 
             var users = new List<Users>
