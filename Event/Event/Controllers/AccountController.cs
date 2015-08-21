@@ -13,6 +13,7 @@ using Event.Models;
 namespace Event.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class AccountController : Controller
     {
         public AccountController()
