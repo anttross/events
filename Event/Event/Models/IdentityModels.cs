@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Event.Models
@@ -14,17 +16,27 @@ namespace Event.Models
         [Display(Name = "שם משפחה")]
         public string LastName { get; set; }
 
+        [Required(ErrorMessage = "* יש להכניס שם משתמש")]
+        [Display(Name = "שם משתמש")]
+        public override string UserName { get; set; }
+
         [Required(ErrorMessage = "* יש להכניס דוא\"ל")]
         [Display(Name = "דוא\"ל")]
         [EmailAddress(ErrorMessage = "דוא\"ל שגוי")]
-        public override string UserName { get; set; }
+        public override string Email { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", HtmlEncode = true, ApplyFormatInEditMode = true)]
+        public DateTime Birthday { get; set; }
+
+        public virtual ICollection<Events> EventsList { get; set; }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection")
-        {
-        }
-    }
+    //public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    //{
+    //    public ApplicationDbContext()
+    //        : base("DefaultConnection")
+    //    {
+    //    }
+    //}
 }

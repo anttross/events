@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,6 +12,7 @@ using Event.DAL;
 
 namespace Event.Controllers
 {
+    [Authorize]
     public class EventsController : Controller
     {
         private EventContext db = new EventContext();
@@ -18,7 +20,9 @@ namespace Event.Controllers
         // GET: /Events/
         public ActionResult Index()
         {
-            return View(db.Events.ToList()); 
+            var id = User.Identity.GetUserId();
+            var user = db.Users.FirstOrDefault(x => x.Id == id);
+            return View(user.EventsList); 
         }
 
         // GET: /Events/Details/5

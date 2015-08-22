@@ -184,7 +184,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Events.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -283,7 +282,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58014</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58014/</IISUrl>
+          <IISUrl>https://localhost:44302/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

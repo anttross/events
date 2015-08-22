@@ -5,24 +5,18 @@ using System.Web;
 using Event.Models;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Event.DAL
 {
-    public class EventContext : DbContext
+    public class EventContext : IdentityDbContext<ApplicationUser>
     {
         public EventContext()
             : base("DefaultConnection")
         {
         }
-        
-        public DbSet<Users> Users { get; set; }
-        public DbSet<Events> Events { get; set; }
-      
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        }
 
+        public DbSet<Events> Events { get; set; }
 
     }
 }

@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Event.Models;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
+using Event.DAL;
 
 namespace Event.Controllers
 {
@@ -17,16 +20,18 @@ namespace Event.Controllers
     public class AccountController : Controller
     {
         public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new EventContext())))
         {
         }
 
         public AccountController(UserManager<ApplicationUser> userManager)
         {
             UserManager = userManager;
+            Db = new EventContext();
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
+        public EventContext Db { get; private set; }
 
         //
         // GET: /Account/Login
@@ -79,17 +84,51 @@ namespace Event.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                try
                 {
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    // Remove leading and trailing spaces 
+                    model.UserName = model.UserName.Trim();
+                    // Check email
+                    ApplicationUser user = await UserManager.FindByEmailAsync(model.Email);
+                    if (user != null)
+                        ModelState.AddModelError("Email", "דוא\"ל כבר קיים");
+                    // Display errors if has
+                    if (!ModelState.IsValid)
+                        return View(model);
+
+                    user = new ApplicationUser()
+                    {
+                        UserName = model.UserName,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Email = model.Email
+                    };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        await SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
                 }
-                else
+                catch (DbEntityValidationException e)
                 {
-                    AddErrors(result);
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    throw;
                 }
+
             }
 
             // If we got this far, something failed, redisplay form
@@ -120,10 +159,10 @@ namespace Event.Controllers
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.Error ? "An error has occurred."
+                message == ManageMessageId.ChangePasswordSuccess ? "הסיסמא שונתה בהצלחה."
+                : message == ManageMessageId.SetPasswordSuccess ? "הסיסמא עודכנה."
+                : message == ManageMessageId.RemoveLoginSuccess ? "ההתחברות החיצונית הוסרה בהצלחה."
+                : message == ManageMessageId.Error ? "שגיאה."
                 : "";
             ViewBag.HasLocalPassword = HasPassword();
             ViewBag.ReturnUrl = Url.Action("Manage");
@@ -379,7 +418,8 @@ namespace Event.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 
