@@ -26,6 +26,11 @@ namespace Event
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/superhero.css",
                       "~/Content/site.css"));
+            // datepicker
+            bundles.Add(new ScriptBundle("~/bundles/date").Include(
+                     "~/Scripts/bootstrap-datepicker.js"));
+            bundles.Add(new StyleBundle("~/Content/date").Include(
+                     "~/Content/bootstrap-datepicker.css"));
         }
     }
 }

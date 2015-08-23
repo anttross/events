@@ -101,7 +101,8 @@ namespace Event.Controllers
                         UserName = model.UserName,
                         FirstName = model.FirstName,
                         LastName = model.LastName,
-                        Email = model.Email
+                        Email = model.Email,
+                        Birthday = model.Birthday
                     };
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Event.Models
 {
@@ -62,6 +63,11 @@ namespace Event.Models
         [Required(ErrorMessage = "* יש להכניס שם משפחה")]
         [Display(Name = "שם משפחה")]
         public string LastName { get; set; }
+
+        [Display(Name = "יום הולדת")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", HtmlEncode = true, ApplyFormatInEditMode = true)]
+        public DateTime Birthday { get; set; }
 
         [Required(ErrorMessage = "* יש להכניס סיסמא")]
         [StringLength(100, ErrorMessage = "ה{0} חייבת להכיל {2} תווים לפחות.", MinimumLength = 6)]
