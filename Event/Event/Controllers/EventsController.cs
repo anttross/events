@@ -51,12 +51,14 @@ namespace Event.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ID,UserID,Event,Date")] Events events)
+        public ActionResult Create([Bind(Include="ID,Event,Date")] Events events)
         {
             if (ModelState.IsValid)
             {
-                db.Events.Add(events);
+                var user = db.Users.Find(User.Identity.GetUserId());
+                user.EventsList.Add(events);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 

@@ -8,7 +8,7 @@ namespace Event.Models
     public class Events
     {
         public int ID { get; set; }
-        public int UserID { get; set; }
+        public string ApplicationUserID { get; set; }
         public string Event { get; set; }
         public DateTime Date { get; set; }
     }
