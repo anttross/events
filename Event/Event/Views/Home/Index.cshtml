@@ -5,11 +5,11 @@
 <div class="jumbotron">
     <h1>Events</h1>
     <p class="lead">לוח האירועים שלך</p>
-   <!-- <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
--->
 </div>
 
 <div class="row">
+@if (!Request.IsAuthenticated)
+{
     <div class="col-md-4">
         <h2>תרומת כסף</h2>
         <p>
@@ -27,4 +27,5 @@
         <p>לו האירועים שלך יזכיר לך שבוע לפני המועד על האירוע שקבעת כך שלא תשכח שוב על יום הולדת של אישתך.</p>
         <p><a class="btn btn-default" href="/Account/Register">להרשמה &raquo;</a></p>
     </div>
+}
 </div>

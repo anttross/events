@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Event.Helpers
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -7,16 +9,16 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("שלום " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLinkIcon("שלום " + User.Identity.GetUserName() + "!", "Manage", "Account", "glyphicon glyphicon-user", htmlAttributes: new { title = "Manage" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;התנתק</a></li>
     </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("הרשמה", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("כניסה", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLinkIcon("הרשמה", "Register", "Account", "glyphicon glyphicon-edit", new { id = "registerLink" })</li>
+        <li>@Html.ActionLinkIcon("כניסה", "Login", "Account", "glyphicon glyphicon-log-in", new { id = "loginLink" })</li>
     </ul>
 }

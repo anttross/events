@@ -64,6 +64,7 @@ namespace Event.Models
         [Display(Name = "שם משפחה")]
         public string LastName { get; set; }
 
+        [Required(ErrorMessage = "* יש להכניס יום הולדת")]
         [Display(Name = "יום הולדת")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", HtmlEncode = true, ApplyFormatInEditMode = true)]
