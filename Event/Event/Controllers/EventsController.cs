@@ -85,7 +85,7 @@ namespace Event.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ID,UserID,Event,Date")] Events events)
+        public ActionResult Edit([Bind(Include = "ID,ApplicationUserID,Event,Date")] Events events)
         {
             if (ModelState.IsValid)
             {

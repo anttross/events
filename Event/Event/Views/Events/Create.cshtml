@@ -7,38 +7,39 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Events</h4>
         <hr />
         @Html.ValidationSummary(true)
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.UserID, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserID)
-                @Html.ValidationMessageFor(model => model.UserID)
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.UserID, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserID)
+                    @Html.ValidationMessageFor(model => model.UserID)
+                </div>
+            </div>*@
+
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Event, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Event)
+                @Html.TextBoxFor(m => m.Event, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Event)
             </div>
+            @Html.LabelFor(m => m.Event, new { @class = "col-md-2 control-label" })
+        </div>
+        <div class="form-group">
+            <div id="sandbox-container" class="col-md-10">
+                @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Event)
+            </div>
+            @Html.LabelFor(m => m.Date, new { @class = "col-md-2 control-label" })
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Date)
-                @Html.ValidationMessageFor(model => model.Date)
-            </div>
-        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -52,6 +53,15 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+@Styles.Render("~/Content/date")
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/date")
+    <script type="text/javascript">
+        $('#sandbox-container input').datepicker({
+            format: "dd/mm/yyyy",
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
 }
