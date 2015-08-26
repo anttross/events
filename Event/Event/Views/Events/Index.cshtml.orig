@@ -4,10 +4,17 @@
     ViewBag.Title = "רשימת אירועים";
 }
 
+<<<<<<< HEAD
+<h2>רשימת אירועים</h2>
+
+<p>
+    @Html.ActionLink("הוסף חדש", "Create")
+=======
 <h2>לוח האירועים שלך</h2>
 
 <p>
     @Html.ActionLink("הוסף אירוע", "Create")
+>>>>>>> b78f397199563dd0039f13a471c5b6b17a673219
 </p>
 
 <table class="table table-striped table-hover">
@@ -37,9 +44,15 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
+<<<<<<< HEAD
+                @Html.ActionLink("פרטים", "Details", new { id = item.ID }) | 
+                @Html.ActionLink("עריכה", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("מחיקה", "Delete", new { id = item.ID }) 
+=======
                 @Html.ActionLink("פרטים", "Details", new { id = item.ID }) |
                 @Html.ActionLink("ערוך", "Edit", new { id = item.ID }) |
                 @Html.ActionLink("בטל", "Delete", new { id = item.ID })
+>>>>>>> b78f397199563dd0039f13a471c5b6b17a673219
             </td>
         </tr>
     }

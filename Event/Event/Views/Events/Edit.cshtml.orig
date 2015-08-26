@@ -23,8 +23,13 @@
                 @Html.TextBoxFor(model => model.EventItem.ApplicationUserID, new { @class = "form-control", @disabled = "" })
                 @Html.ValidationMessageFor(model => model.EventItem.ApplicationUserID)
             </div>
+<<<<<<< HEAD
             @Html.LabelFor(model => model.EventItem.ApplicationUserID, new { @class = "control-label col-md-2" })
+        </div>
+=======
+            @Html.LabelFor(model => model.ApplicationUserID, new { @class = "control-label col-md-2" })
         </div>*@
+>>>>>>> b78f397199563dd0039f13a471c5b6b17a673219
 
         <div class="form-group">
             <div class="col-md-10">

@@ -8,10 +8,13 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLinkIcon("שלום " + User.Identity.GetUserName() + "!", "Manage", "Account", "glyphicon glyphicon-user", htmlAttributes: new { title = "Manage" })
-        </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;התנתק</a></li>
+        <li>
+            @Html.ActionLinkIcon("ניהול", "Manage", "Account", "glyphicon glyphicon-user", htmlAttributes: new { title = "Manage" })
+        </li>
+        @*<li>
+           שלום @Html.Label(User.Identity.GetUserName()) !          
+        </li>*@
     </ul>
     }
 }
