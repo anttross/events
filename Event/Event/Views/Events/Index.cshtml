@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Event.Models.Events>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "רשימת אירועים";
 }
 
-<h2>Index</h2>
+<h2>רשימת אירועים</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("הוסף חדש", "Create")
 </p>
 <table class="table table-striped table-hover">
     <tr>
@@ -36,9 +36,9 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("פרטים", "Details", new { id = item.ID }) | 
+                @Html.ActionLink("עריכה", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("מחיקה", "Delete", new { id = item.ID }) 
             </td>
         </tr>
     }

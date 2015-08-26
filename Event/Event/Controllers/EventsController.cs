@@ -43,7 +43,9 @@ namespace Event.Controllers
         // GET: /Events/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new EventCreateViewModel();
+
+            return View(model);
         }
 
         // POST: /Events/Create
@@ -51,18 +53,18 @@ namespace Event.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ID,Event,Date")] Events events)
+        public ActionResult Create(EventCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = db.Users.Find(User.Identity.GetUserId());
-                user.EventsList.Add(events);
+                user.EventsList.Add(model.EventItem);
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            return View(events);
+            return View(model);
         }
 
         // GET: /Events/Edit/5
@@ -77,7 +79,9 @@ namespace Event.Controllers
             {
                 return HttpNotFound();
             }
-            return View(events);
+            var model = new EventCreateViewModel();
+            model.EventItem = events;
+            return View(model);
         }
 
         // POST: /Events/Edit/5
@@ -85,15 +89,15 @@ namespace Event.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ApplicationUserID,Event,Date")] Events events)
+        public ActionResult Edit(EventCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(events).State = EntityState.Modified;
+                db.Entry(model.EventItem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(events);
+            return View(model);
         }
 
         // GET: /Events/Delete/5
