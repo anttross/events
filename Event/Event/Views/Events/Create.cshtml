@@ -54,15 +54,19 @@
     @Html.ActionLink("חזרה לרשימה", "Index")
 </div>
 
-@Styles.Render("~/Content/date")
+@Styles.Render("~/Content/date3")
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/date")
+    @Scripts.Render("~/bundles/date3")
     <script type="text/javascript">
-        $('#sandbox-container input').datepicker({
-            format: "dd/mm/yyyy",
-            autoclose: true,
-            todayHighlight: true
+        $(function () {
+            $('#sandbox-container input').datetimepicker({
+                format: 'DD/MM/YYYY HH:mm',
+                sideBySide: true,
+                showClose: true,
+                locale: 'he',
+                widgetPositioning: { horizontal: 'right' }
+            });
         });
     </script>
 }

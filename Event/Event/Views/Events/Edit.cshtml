@@ -45,25 +45,30 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="שמירה" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("חזרה לרשימה", "Index")
 </div>
 
-@Styles.Render("~/Content/date")
+@Styles.Render("~/Content/date3")
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/date")
-    <script type="text/javascript">
-        $('#sandbox-container input').datepicker({
-            format: "dd/mm/yyyy",
-            autoclose: true,
-            todayHighlight: true
+   @Scripts.Render("~/bundles/date3")
+<script type="text/javascript">
+    $(function () {
+        $('#sandbox-container input').datetimepicker({
+            format: 'DD/MM/YYYY HH:mm',
+            sideBySide: true,
+            showClose: true,
+            locale: 'he',
+            widgetPositioning: { horizontal: 'right' }
         });
-    </script>
+    });
+</script>
+
 }

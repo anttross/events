@@ -63,16 +63,15 @@
     </div>
 }
 
-@Styles.Render("~/Content/date")
+@Styles.Render("~/Content/date3")
 @section Scripts {
 @Scripts.Render("~/bundles/jqueryval")
-@Scripts.Render("~/bundles/date")
+@Scripts.Render("~/bundles/date3")
 <script type="text/javascript">
-    $('#sandbox-container input').datepicker({
-        format: "dd/MM/yyyy",
-        autoclose: true,
-        todayHighlight: true
+    $(function () {
+        $('#sandbox-container input').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
     });
 </script>
-
 }

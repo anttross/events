@@ -31,6 +31,11 @@ namespace Event
                      "~/Scripts/bootstrap-datepicker.js"));
             bundles.Add(new StyleBundle("~/Content/date").Include(
                      "~/Content/bootstrap-datepicker.css"));
+            // Bootstrap.v3.Datetimepicker
+            bundles.Add(new ScriptBundle("~/bundles/date3").Include(
+                  "~/Scripts/moment-with-locales.min.js").Include("~/Scripts/bootstrap-datetimepicker.js"));
+            bundles.Add(new StyleBundle("~/Content/date3").Include(
+                     "~/Content/bootstrap-datetimepicker.css"));
         }
     }
 }
