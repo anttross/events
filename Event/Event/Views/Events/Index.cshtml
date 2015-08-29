@@ -7,7 +7,7 @@
 <h2>לוח האירועים שלך</h2>
 
 <p>
-    @Html.ActionLink("הוסף אירוע", "Create")
+    @Html.ActionLink("הוסף אירוע", "Create", null, new { @class = "btn btn-primary btn-sm" })
 </p>
 
 <table class="table table-striped table-hover">
@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.ActionLink("פרטים", "Details", new { id = item.ID }) |
-                @Html.ActionLink("ערוך", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("בטל", "Delete", new { id = item.ID })
+                @Html.ActionLink("פרטים", "Details", new { id = item.ID }, new { @class = "label label-info" }) |
+                @Html.ActionLink("ערוך", "Edit", new { id = item.ID }, new { @class = "label label-warning" }) |
+                @Html.ActionLink("בטל", "Delete", new { id = item.ID }, new { @class = "label label-danger" })
             </td>
         </tr>
     }

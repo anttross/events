@@ -16,31 +16,29 @@
         <hr />
         @Html.ValidationSummary(true)
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.UserID, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.UserID)
-                    @Html.ValidationMessageFor(model => model.UserID)
-                </div>
-            </div>*@
-
-
         <div class="form-group">
             <div class="col-md-10">
-                @*@Html.TextBoxFor(m => m.EventItem.Event, new { @class = "form-control" })*@
-                @Html.DropDownListFor(m => m.EventItem.Event, Model.Subjects, "בחר", new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.EventItem.Event, Model.Subjects, "בחר", new { @id = "subject", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.EventItem.Event)
             </div>
             @Html.LabelFor(m => m.EventItem.Event, new { @class = "col-md-2 control-label" })
         </div>
+
+        <div id="otherOption" class="form-group" style="display: none;">
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Other, new { @class = "form-control", @placeholder = "הכנס שם" })
+                @Html.ValidationMessageFor(model => model.Other)
+            </div>
+            @*@Html.LabelFor(m => m.Other, new { @class = "col-md-2 control-label" })*@
+        </div>
+
         <div class="form-group">
             <div id="sandbox-container" class="col-md-10">
-                @Html.TextBoxFor(m => m.EventItem.Date, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.EventItem.Date, new { @class = "form-control", @dir="ltr" })
                 @Html.ValidationMessageFor(model => model.EventItem.Date)
             </div>
             @Html.LabelFor(m => m.EventItem.Date, new { @class = "col-md-2 control-label" })
         </div>
-
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -59,13 +57,35 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/date3")
     <script type="text/javascript">
-        $(function () {
+
+        $(document).ready(function () {
+            jQuery.validator.methods.date = function (value, element) {
+                var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+                if (isChrome) {
+                    var d = new Date();
+                    return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+                } else {
+                    return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+                }
+            };
             $('#sandbox-container input').datetimepicker({
                 format: 'DD/MM/YYYY HH:mm',
                 sideBySide: true,
                 showClose: true,
                 locale: 'he',
                 widgetPositioning: { horizontal: 'right' }
+            });
+           
+            $('#subject').change(function () {
+                var selected = $(this).val();
+                if (selected == 'אחר') {
+                    //alert('The option with value ' + selected);
+                    $('#otherOption').show();
+                }
+                else {
+                    $('#otherOption').hide();
+                    $('#Other').val('');
+                }
             });
         });
     </script>

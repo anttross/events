@@ -49,14 +49,14 @@ namespace Event.Controllers
         }
 
         // POST: /Events/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(EventCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
+                if (!string.IsNullOrEmpty(model.Other))
+                    model.EventItem.Event = model.Other;
                 var user = db.Users.Find(User.Identity.GetUserId());
                 user.EventsList.Add(model.EventItem);
                 db.SaveChanges();
@@ -72,27 +72,32 @@ namespace Event.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Events");//new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Events events = db.Events.Find(id);
             if (events == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Events");//HttpNotFound();
             }
             var model = new EventCreateViewModel();
             model.EventItem = events;
+            if (model.Subjects.Find(x => x.Text.Equals(model.EventItem.Event)) == null)
+            {
+                model.Other = model.EventItem.Event;
+                model.EventItem.Event = "אחר";
+            }
             return View(model);
         }
 
         // POST: /Events/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EventCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
+                if (!string.IsNullOrEmpty(model.Other))
+                    model.EventItem.Event = model.Other;
                 db.Entry(model.EventItem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

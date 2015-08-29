@@ -19,12 +19,12 @@ namespace Event.Models
 
         [Display(Name = "תאריך")]
         [Required(ErrorMessage = "* יש להכניס תאריך")]
-        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", HtmlEncode = true, ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:HH:mm dd/MM/yyyy}")]
         public DateTime Date { get; set; }
 
         public Events()
         {
-            this.Date = DateTime.Today;
+            this.Date = DateTime.Now;
         }
     }
 }

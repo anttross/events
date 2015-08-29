@@ -14,6 +14,11 @@ namespace Event.Models
         public Events EventItem { get; set; }
 
         /// <summary>
+        /// Custom event
+        /// </summary>
+        public string Other { get; set; }
+
+        /// <summary>
         /// List of subjects
         /// </summary>
         public List<SelectListItem> Subjects { get; set; }

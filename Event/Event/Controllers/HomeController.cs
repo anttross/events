@@ -1,6 +1,7 @@
 ﻿using Event.DAL;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,8 +21,12 @@ namespace Event.Controllers
 
         public ActionResult Index()
         {
-            
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Events");
+            }
+            else
+                return View();
         }
 
         public ActionResult About()
