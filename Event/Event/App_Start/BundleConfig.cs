@@ -36,6 +36,9 @@ namespace Event
                   "~/Scripts/moment-with-locales.min.js").Include("~/Scripts/bootstrap-datetimepicker.js"));
             bundles.Add(new StyleBundle("~/Content/date3").Include(
                      "~/Content/bootstrap-datetimepicker.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/unify").Include(
+                     "~/Scripts/jquery.cslider.js"));
         }
     }
 }
