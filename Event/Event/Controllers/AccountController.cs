@@ -302,7 +302,7 @@ namespace Event.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var user = new ApplicationUser() { UserName = model.UserName, Birthday = DateTime.Now, FirstName = model.UserName, LastName = model.UserName ,Email = "face@face.com"};
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
