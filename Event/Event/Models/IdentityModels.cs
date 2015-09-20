@@ -31,12 +31,4 @@ namespace Event.Models
 
         public virtual ICollection<Events> EventsList { get; set; }
     }
-
-    //public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    //{
-    //    public ApplicationDbContext()
-    //        : base("DefaultConnection")
-    //    {
-    //    }
-    //}
 }

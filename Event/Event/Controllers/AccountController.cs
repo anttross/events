@@ -55,7 +55,7 @@ namespace Event.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError("", "שם משתמש אן סיסמה שגועים!");
                 }
             }
 
